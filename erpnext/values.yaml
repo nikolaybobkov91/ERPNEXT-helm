@@ -8,6 +8,9 @@
 # dbRootUser: ""
 # dbRootPassword: ""
 # dbRds: false
+# dbSslca: false
+# db_ssl_cert: ""
+# db_ssl_key
 
 image:
   repository: frappe/erpnext
