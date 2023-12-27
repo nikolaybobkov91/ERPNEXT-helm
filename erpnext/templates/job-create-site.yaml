@@ -50,7 +50,7 @@ spec:
         command: ["bash", "-c"]
         args:
           - >
-            bench set-config -g db_ssl_ca '{{$DB_SSL_CA}}' ;
+            bench set-config -g db_ssl_ca '$DB_SSL_CA' --parse ;
             bench new-site $(SITE_NAME)
             --no-mariadb-socket
             --db-type=$(DB_TYPE)
