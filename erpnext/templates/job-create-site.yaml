@@ -50,7 +50,7 @@ spec:
         command: ["bash", "-c"]
         args:
           - >
-            bench set-config -g db_ssl_ca=$(DB_SSL_CA);
+            bench set-config -g db_ssl_ca $(DB_SSL_CA);
             bench new-site $(SITE_NAME)
             --no-mariadb-socket
             --db-type=$(DB_TYPE)
@@ -67,7 +67,7 @@ spec:
           {{- if .Values.jobs.createSite.forceCreate }}
             --force
           {{- end }}
-            ;bench show-config $(SITE_NAME)
+            ;bench --site all show-config -f text
             ;rm -f currentsite.txt
         env:
           - name: "SITE_NAME"
