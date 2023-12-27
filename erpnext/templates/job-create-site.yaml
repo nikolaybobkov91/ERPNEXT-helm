@@ -50,7 +50,7 @@ spec:
         command: ["bash", "-c"]
         args:
           - >
-            bench set-config -g db_ssl_ca '$DB_SSL_CA' --parse ;
+            bench set-config -g db_ssl_ca "home/ca-cert.pem" ;
             bench new-site $(SITE_NAME)
             --no-mariadb-socket
             --db-type=$(DB_TYPE)
@@ -137,8 +137,12 @@ spec:
             mountPath: /home/frappe/frappe-bench/sites
           - name: logs
             mountPath: /home/frappe/frappe-bench/logs
+          - name: certmount
+            mountPath: /home
       restartPolicy: Never
       volumes:
+        - name: certmount
+          secret: {{.Values.dbSSLCa }}
         - name: sites-dir
           {{- if .Values.persistence.worker.enabled }}
           persistentVolumeClaim:
