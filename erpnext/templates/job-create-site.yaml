@@ -56,8 +56,6 @@ spec:
             --db-host=$(DB_HOST)
             --db-port=$(DB_PORT)
             --db_ssl_ca=$(DB_SSL_CA)
-            --db_ssl_cert$(DB_SSL_CERT)
-            --db_ssl_key$(DB_SSL_KEY)
             --admin-password=$(ADMIN_PASSWORD)
             --mariadb-root-username=$(DB_ROOT_USER)
             --mariadb-root-password=$(DB_ROOT_PASSWORD)
@@ -124,6 +122,11 @@ spec:
             {{- end }}
           - name: "ADMIN_PASSWORD"
             value: "{{ .Values.jobs.createSite.adminPassword }}"
+          - name: "DB_SSL_CA"
+            valueFrom:
+              secretKeyRef:
+                key:  ca-cert.pem
+                name: {{.Values.dbSSLCa }}
         resources:
           {{- toYaml .Values.jobs.createSite.resources | nindent 10 }}
         securityContext:
