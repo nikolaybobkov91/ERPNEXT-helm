@@ -138,11 +138,14 @@ spec:
           - name: logs
             mountPath: /home/frappe/frappe-bench/logs
           - name: certmount
-            mountPath: /home
+            mountPath: /home/ca-cert.pem
+            subPath: ca-cert.pem
+            readOnly: true
       restartPolicy: Never
       volumes:
         - name: certmount
-          secret: {{.Values.dbSSLCa }}
+          secret: 
+            secretName: {{.Values.dbSSLCa }}
         - name: sites-dir
           {{- if .Values.persistence.worker.enabled }}
           persistentVolumeClaim:
