@@ -50,7 +50,7 @@ spec:
         command: ["bash", "-c"]
         args:
           - >
-            bench set-config -g db_ssl_ca "home/ca-cert.pem" ;
+            bench set-config -g db_ssl_ca "/var/run/secrets/kubernetes.io/ca-cert.pem" ;
             bench new-site $(SITE_NAME)
             --no-mariadb-socket
             --db-type=$(DB_TYPE)
@@ -138,7 +138,7 @@ spec:
           - name: logs
             mountPath: /home/frappe/frappe-bench/logs
           - name: certmount
-            mountPath: /home/ca-cert.pem
+            mountPath: /var/run/secrets/kubernetes.io/ca-cert.pem
             subPath: ca-cert.pem
             readOnly: true
       restartPolicy: Never
