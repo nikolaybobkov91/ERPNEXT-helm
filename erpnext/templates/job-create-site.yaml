@@ -51,6 +51,8 @@ spec:
         args:
           - >
             bench set-config -g db_ssl_ca "/etc/ssl/certs/ca-cert.pem" ;
+            bench set-config -g db_ssl_cert "/etc/ssl/certs/ca-cert.pem" ;
+            bench set-config -g db_ssl_key "/etc/ssl/certs/ca-cert.pem" ;
             bench --site all show-config -f text;
             bench new-site $(SITE_NAME)
             --no-mariadb-socket
